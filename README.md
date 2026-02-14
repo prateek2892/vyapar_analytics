@@ -48,31 +48,32 @@ Add your email, phone number, WhatsApp, address, etc. between the marked lines.
 
 ## Images/Icons Note
 
-The design references several images and icons. You'll need to:
-1. Create or source the following images:
-   - Logo icon (SVG is already in the code, you can customize colors)
-   - Hero illustration (businessman with dashboard)
-   - Challenge icons (4 icons)
-   - Service icons (4 icons)
-   - Testimonial photo
+**GOOD NEWS!** All icons and the hero illustration are now built-in as SVG graphics - no external files needed!
 
-2. Save them in the same folder as your HTML files
-3. The file names are already referenced in the HTML:
-   - hero-illustration.svg
-   - icon-inventory.svg
-   - icon-reports.svg
-   - icon-profit.svg
-   - icon-sales.svg
-   - icon-dashboard.svg
-   - icon-optimization.svg
-   - icon-analysis.svg
-   - icon-automation.svg
-   - testimonial-person.jpg
+The only image you might want to replace is the testimonial photo. Currently it uses a placeholder from ui-avatars.com that works automatically.
 
-Alternatively, you can use placeholder images from services like:
-- https://placeholder.com/
-- https://unsplash.com/
-- https://www.flaticon.com/ (for icons)
+### To Add Your Own Testimonial Photo:
+
+1. **Option A - Use your own image:**
+   - Save your photo as `testimonial-person.jpg` in the same folder as index.html
+   - In index.html, find the testimonial section and uncomment this line:
+     ```html
+     <img src="testimonial-person.jpg" alt="Suresh Patel">
+     ```
+   - Remove or comment out the ui-avatars.com line
+
+2. **Option B - Keep the automatic placeholder:**
+   - The current placeholder automatically generates initials
+   - Change the name in the URL to match your testimonial:
+     ```html
+     <img src="https://ui-avatars.com/api/?name=Your+Name&size=150&background=2D8B7F&color=fff&bold=true" alt="Your Name">
+     ```
+
+3. **Option C - Use a free stock photo:**
+   - Get professional photos from https://unsplash.com/
+   - Download, rename to `testimonial-person.jpg`, and use Option A
+
+All other graphics (boxes, charts, icons, gears) are now inline SVG code - they'll work immediately!
 
 ## Customization
 
