@@ -206,7 +206,7 @@ body {
 
 .wave {
     position: absolute;
-    bottom: 0;
+    bottom: -1px;
     left: 0;
     width: 100%;
     overflow: hidden;
@@ -631,11 +631,12 @@ body {
     }
 
     .hero {
-        padding: 60px 0 0 0;
+        padding: 60px 0 60px 0;
     }
 
     .hero-content {
         min-height: auto;
+        padding-bottom: 40px;
     }
 
     .hero-text h2 {
@@ -649,6 +650,10 @@ body {
     .btn-secondary {
         font-size: 16px;
         padding: 14px 28px;
+    }
+
+    .wave svg {
+        height: 60px;
     }
 
     .section-title {
@@ -704,6 +709,10 @@ body {
 
     .hero-text p {
         font-size: 15px;
+    }
+
+    .wave svg {
+        height: 40px;
     }
 
     .section-title {
