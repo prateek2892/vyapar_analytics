@@ -48,5 +48,6 @@
     "sub": "Tell us about your business challenge. We'll respond within 24 hours.",
     "formUrl": "https://forms.gle/eqi5uAZNsGTReFTH8",
     "formCta": "Reach Out to Us"
-  }
+  },
+  "footer": { "tagline": "Strategy. Execution. Results.", "copy": "" }
 }
