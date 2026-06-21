@@ -1,109 +1,73 @@
-# Vyapaar Analytics Website
+# StratGO Consulting — Website
 
-This website is fully responsive and works on both desktop and mobile devices.
+Single-page consulting website with content admin panel. Hosted on GitHub Pages.
 
-## Files Included
+## Files
 
-1. **index.html** - Home page
-2. **about.html** - About Us page
-3. **contact.html** - Contact page
-4. **styles.css** - All styling for the website
-5. **script.js** - JavaScript for mobile menu and animations
+| File | Purpose |
+|---|---|
+| `index.html` | Main website (public) |
+| `admin.html` | Content admin panel (private) |
+| `content.json` | Site content — this is what you edit & re-upload to update the live site |
 
-## Important: Where to Add Your Content
+---
 
-### Google Form Links
-Search for `<!-- GOOGLE FORM LINK:` in the HTML files to find where to add your Google Form URL.
-Replace `#` with your actual Google Form link in these locations:
-- index.html (3 places): Navigation "Free Audit" button, Hero section button, and WhatsApp consultation button
-- about.html (1 place): Navigation "Free Audit" button
-- contact.html (1 place): Navigation "Free Audit" button
+## Setup: GitHub Pages
 
-### About Us Content
-In **about.html**, find this section:
-```html
-<!-- ========================================== -->
-<!-- ADD YOUR ABOUT US CONTENT BELOW THIS LINE -->
-<!-- ========================================== -->
-```
-Add your company history, mission, vision, team info, etc. between the marked lines.
+1. Create a new GitHub repository (e.g. `stratgo-website`)
+2. Upload all three files to the repository root
+3. Go to **Settings → Pages → Source → Deploy from branch → main → / (root)**
+4. Your site will be live at `https://yourusername.github.io/stratgo-website/`
 
-### Contact Details
-In **contact.html**, find this section:
-```html
-<!-- ============================================ -->
-<!-- ADD YOUR CONTACT DETAILS BELOW THIS LINE -->
-<!-- ============================================ -->
-```
-Add your email, phone number, WhatsApp, address, etc. between the marked lines.
+---
 
-## Publishing to GitHub Pages
+## Admin Panel
 
-1. Create a new repository on GitHub
-2. Upload all files (index.html, about.html, contact.html, styles.css, script.js)
-3. Go to repository Settings → Pages
-4. Select the branch (usually 'main') and root folder
-5. Click Save
-6. Your website will be live at: https://yourusername.github.io/repository-name/
+**URL:** `yoursite.com/admin.html` (or `localhost/admin.html`)  
+**Password:** `stratgo@2024`
 
-## Images/Icons Note
+> ⚠️ To change the password, open `admin.html` and find the line:
+> `const PASS = 'stratgo@2024';` — change the string to your new password.
 
-**GOOD NEWS!** All icons and the hero illustration are now built-in as SVG graphics - no external files needed!
+### How to update your live website
 
-The only image you might want to replace is the testimonial photo. Currently it uses a placeholder from ui-avatars.com that works automatically.
+1. Open `admin.html` in your browser
+2. Sign in with the admin password
+3. Make edits in any section and click **Save**
+4. Go to **Export / Import** → click **Download content.json**
+5. Go to your GitHub repo → click `content.json` → click the ✏️ edit icon → paste the new content (or drag-drop upload the file)
+6. Commit the change — GitHub Pages redeploys in ~60 seconds
 
-### To Add Your Own Testimonial Photo:
+---
 
-1. **Option A - Use your own image:**
-   - Save your photo as `testimonial-person.jpg` in the same folder as index.html
-   - In index.html, find the testimonial section and uncomment this line:
-     ```html
-     <img src="testimonial-person.jpg" alt="Suresh Patel">
-     ```
-   - Remove or comment out the ui-avatars.com line
+## Google Form Setup
 
-2. **Option B - Keep the automatic placeholder:**
-   - The current placeholder automatically generates initials
-   - Change the name in the URL to match your testimonial:
-     ```html
-     <img src="https://ui-avatars.com/api/?name=Your+Name&size=150&background=2D8B7F&color=fff&bold=true" alt="Your Name">
-     ```
+1. Go to [forms.google.com](https://forms.google.com) and create a new form
+2. **Recommended fields:**
+   - Full Name *(required)*
+   - Company Name *(required)*
+   - Job Title *(required)*
+   - Business Email *(required)*
+   - Area of Interest: Strategy / Operations / Analytics / Transformation / IT / Management / Other *(dropdown)*
+   - Estimated Project Timeline *(short answer)*
+   - Brief Description of Your Challenge *(paragraph)*
+   - How did you hear about us? *(optional)*
+3. Click **Send → Link icon** → copy the short URL (e.g. `https://forms.gle/abc123`)
+4. In admin panel → **Contact** → paste the URL → Save → Download content.json → upload to GitHub
 
-3. **Option C - Use a free stock photo:**
-   - Get professional photos from https://unsplash.com/
-   - Download, rename to `testimonial-person.jpg`, and use Option A
+---
 
-All other graphics (boxes, charts, icons, gears) are now inline SVG code - they'll work immediately!
+## Customization Quick Reference
 
-## Customization
+| What to change | Where |
+|---|---|
+| Stats numbers | Admin → Stats |
+| Services text | Admin → Services |
+| Founder bios | Admin → About & Founders |
+| Google Form URL | Admin → Contact |
+| Footer tagline | Admin → Footer |
+| Admin password | Edit `const PASS` in `admin.html` |
 
-### Colors
-Edit the `:root` section in styles.css to change the color scheme:
-```css
-:root {
-    --primary-color: #2D8B7F;
-    --secondary-color: #48A999;
-    --dark-blue: #1B3B5F;
-    /* etc. */
-}
-```
+---
 
-### Fonts
-The website uses system fonts by default. To use custom fonts (like Google Fonts), add the link in the `<head>` section of each HTML file.
-
-## Browser Compatibility
-
-This website works on:
-- Chrome, Firefox, Safari, Edge (latest versions)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-- Tablets and all screen sizes
-
-## Need Help?
-
-If you need to make changes, the code is well-commented. Look for the section titles in CSS like:
-- `/* NAVIGATION */`
-- `/* HERO SECTION */`
-- `/* CHALLENGES SECTION */`
-etc.
-
-Good luck with your website! 🚀
+*Built for GitHub Pages — no backend or database required.*

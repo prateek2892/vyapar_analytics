@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>StratGO Admin Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0B1426;--gold:#BFA054;--white:#fff;--bg:#F7F8FA;--border:#E2E8F0;--text:#1A2233;--gray:#6B7A99;--red:#E53E3E;--green:#38A169}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--navy)}
+.login-box{background:#fff;padding:48px 40px;width:100%;max-width:400px;border-bottom:3px solid var(--gold)}
+.login-logo{font-size:1.5rem;font-weight:700;margin-bottom:6px;color:var(--navy)}
+.login-logo span{color:var(--gold)}
+.login-sub{font-size:.84rem;color:var(--gray);margin-bottom:32px}
+.login-box label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);margin-bottom:7px}
+.login-box input{width:100%;border:1.5px solid var(--border);padding:11px 14px;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s}
+.login-box input:focus{border-color:var(--gold)}
+.login-err{color:var(--red);font-size:.82rem;margin-top:10px;min-height:20px}
+.btn-login{width:100%;margin-top:20px;background:var(--navy);color:#fff;border:none;padding:13px;font-size:.9rem;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+.btn-login:hover{background:#1a2f4f}
+
+/* ADMIN LAYOUT */
+#admin-screen{display:none}
+header{background:var(--navy);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(191,160,84,.25)}
+.h-logo{font-size:1.2rem;font-weight:700;color:#fff}.h-logo span{color:var(--gold)}
+.h-right{display:flex;gap:12px;align-items:center}
+.h-tag{font-size:.75rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase}
+.btn-out{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:7px 14px;font-size:.78rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-out:hover{border-color:var(--gold);color:var(--gold)}
+
+.admin-body{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 60px)}
+.sidebar{background:var(--white);border-right:1px solid var(--border);padding:24px 0}
+.sidebar h3{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);padding:0 20px;margin-bottom:8px}
+.sidebar a{display:block;padding:10px 20px;font-size:.85rem;color:var(--text);cursor:pointer;transition:all .2s;border-left:3px solid transparent}
+.sidebar a:hover{background:var(--bg);color:var(--navy)}
+.sidebar a.active{background:var(--bg);color:var(--navy);border-left-color:var(--gold);font-weight:600}
+.sidebar hr{border:none;border-top:1px solid var(--border);margin:16px 0}
+
+.main{padding:32px;overflow-y:auto}
+.panel{display:none}.panel.active{display:block}
+.panel-title{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.panel-sub{font-size:.85rem;color:var(--gray);margin-bottom:28px}
+
+/* FORM ELEMENTS */
+.card{background:var(--white);border:1px solid var(--border);padding:28px;margin-bottom:20px}
+.card-title{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);margin-bottom:6px}
+.field input,.field textarea{width:100%;border:1.5px solid var(--border);padding:9px 12px;font-size:.88rem;font-family:inherit;outline:none;resize:vertical;transition:border .2s;color:var(--text)}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{min-height:90px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.stat-item{background:var(--bg);padding:14px;border:1px solid var(--border)}
+.stat-item label{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:6px}
+.stat-item input{width:100%;border:1.5px solid var(--border);padding:8px 10px;font-size:.88rem;font-family:inherit;outline:none;transition:border .2s}
+.stat-item input:focus{border-color:var(--gold)}
+
+/* SERVICE CARDS */
+.svc-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.svc-item{background:var(--bg);padding:16px;border:1px solid var(--border)}
+.svc-item label{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:5px}
+.svc-item input,.svc-item textarea{width:100%;border:1.5px solid var(--border);padding:7px 10px;font-size:.84rem;font-family:inherit;outline:none;resize:none;transition:border .2s;margin-bottom:8px}
+.svc-item input:focus,.svc-item textarea:focus{border-color:var(--gold)}
+.svc-item textarea{min-height:72px}
+
+/* BUTTONS */
+.btn-save{background:var(--gold);color:var(--navy);border:none;padding:11px 24px;font-size:.88rem;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+.btn-save:hover{background:#D4B76A}
+.btn-dl{background:var(--navy);color:#fff;border:none;padding:11px 24px;font-size:.88rem;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+.btn-dl:hover{background:#1a2f4f}
+.btn-import{background:transparent;color:var(--navy);border:1.5px solid var(--navy);padding:11px 20px;font-size:.88rem;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:all .2s}
+.btn-import:hover{background:var(--navy);color:#fff}
+.bar{display:flex;gap:12px;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);flex-wrap:wrap}
+.toast{display:none;background:var(--green);color:#fff;padding:9px 18px;font-size:.82rem;font-weight:600;letter-spacing:.04em}
+.help-box{background:#EBF8FF;border:1px solid #BEE3F8;padding:16px;font-size:.82rem;line-height:1.7;color:#2B6CB0;margin-bottom:20px}
+.help-box strong{font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Strat<span>GO</span></div>
+    <div class="login-sub">Admin Panel — Restricted Access</div>
+    <label for="pwd">Password</label>
+    <input type="password" id="pwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="login-err" id="err"></div>
+    <button class="btn-login" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin-screen">
+  <header>
+    <div class="h-logo">Strat<span>GO</span> <span style="font-size:.8rem;font-weight:400;color:rgba(255,255,255,.4);margin-left:4px">Admin</span></div>
+    <div class="h-right">
+      <span class="h-tag">Content Manager</span>
+      <button class="btn-out" onclick="logout()">Sign Out</button>
+    </div>
+  </header>
+  <div class="admin-body">
+    <div class="sidebar">
+      <h3>Sections</h3>
+      <a class="active" onclick="showPanel('hero')">Hero</a>
+      <a onclick="showPanel('stats')">Stats</a>
+      <a onclick="showPanel('services')">Services</a>
+      <a onclick="showPanel('about')">About & Founders</a>
+      <a onclick="showPanel('why')">Why StratGO</a>
+      <a onclick="showPanel('contact')">Contact</a>
+      <a onclick="showPanel('footer')">Footer</a>
+      <hr>
+      <h3>Tools</h3>
+      <a onclick="showPanel('export')">Export / Import</a>
+    </div>
+    <div class="main">
+
+      <!-- HERO -->
+      <div class="panel active" id="panel-hero">
+        <div class="panel-title">Hero Section</div>
+        <div class="panel-sub">The first thing visitors see. Keep the headline bold and direct.</div>
+        <div class="card">
+          <div class="card-title">Hero Content</div>
+          <div class="field"><label>Eyebrow Text</label><input id="h-ey" placeholder="e.g. Management Consulting"></div>
+          <div class="field"><label>Main Headline</label><input id="h-hl" placeholder="Bold value proposition"></div>
+          <div class="field"><label>Subheadline</label><textarea id="h-sub"></textarea></div>
+          <div class="field"><label>CTA Button Text</label><input id="h-cta" placeholder="e.g. Start a Conversation"></div>
+        </div>
+        <div class="bar"><button class="btn-save" onclick="saveHero()">Save Hero</button><span class="toast" id="t-hero">Saved!</span></div>
+      </div>
+
+      <!-- STATS -->
+      <div class="panel" id="panel-stats">
+        <div class="panel-title">Statistics Bar</div>
+        <div class="panel-sub">Four key numbers shown below the hero. Keep values punchy (e.g. 50+, 100%).</div>
+        <div class="card">
+          <div class="card-title">Four Stats</div>
+          <div class="stat-grid" id="stats-grid"></div>
+        </div>
+        <div class="bar"><button class="btn-save" onclick="saveStats()">Save Stats</button><span class="toast" id="t-stats">Saved!</span></div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="panel" id="panel-services">
+        <div class="panel-title">Services</div>
+        <div class="panel-sub">Six service offerings displayed in a 3×2 grid.</div>
+        <div class="card">
+          <div class="card-title">Service Cards</div>
+          <div class="svc-list" id="svc-list"></div>
+        </div>
+        <div class="bar"><button class="btn-save" onclick="saveServices()">Save Services</button><span class="toast" id="t-svc">Saved!</span></div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="panel" id="panel-about">
+        <div class="panel-title">About & Founders</div>
+        <div class="panel-sub">Company intro and the two founder profiles.</div>
+        <div class="card">
+          <div class="card-title">Company Introduction</div>
+          <div class="field"><textarea id="ab-intro" style="min-height:100px"></textarea></div>
+        </div>
+        <div id="founders-wrap"></div>
+        <div class="bar"><button class="btn-save" onclick="saveAbout()">Save About</button><span class="toast" id="t-ab">Saved!</span></div>
+      </div>
+
+      <!-- WHY -->
+      <div class="panel" id="panel-why">
+        <div class="panel-title">Why StratGO</div>
+        <div class="panel-sub">Four differentiators displayed in a 2×2 grid on a dark background.</div>
+        <div class="card">
+          <div class="card-title">Differentiators</div>
+          <div id="why-list"></div>
+        </div>
+        <div class="bar"><button class="btn-save" onclick="saveWhy()">Save Why Us</button><span class="toast" id="t-why">Saved!</span></div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="panel" id="panel-contact">
+        <div class="panel-title">Contact Section</div>
+        <div class="panel-sub">Update your Google Form URL here. Paste the shareable link from Google Forms.</div>
+        <div class="help-box">
+          <strong>How to get your Google Form URL:</strong> Open your Google Form → click Send → click the link icon → copy the short URL (forms.gle/...) → paste it below.
+          <br><br><strong>Suggested form fields:</strong> Full Name · Company Name · Job Title · Business Email · Area of Interest (dropdown) · Project Timeline · Brief Description
+        </div>
+        <div class="card">
+          <div class="card-title">Contact Content</div>
+          <div class="field"><label>Section Heading</label><input id="c-head"></div>
+          <div class="field"><label>Subtext</label><textarea id="c-sub" style="min-height:70px"></textarea></div>
+          <div class="field"><label>Google Form URL</label><input id="c-url" placeholder="https://forms.gle/..."></div>
+          <div class="field"><label>Button Text</label><input id="c-cta"></div>
+        </div>
+        <div class="bar"><button class="btn-save" onclick="saveContact()">Save Contact</button><span class="toast" id="t-con">Saved!</span></div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="panel" id="panel-footer">
+        <div class="panel-title">Footer</div>
+        <div class="card">
+          <div class="card-title">Footer Content</div>
+          <div class="field"><label>Tagline</label><input id="f-tag"></div>
+          <div class="field"><label>Copyright Text (without ©)</label><input id="f-copy"></div>
+        </div>
+        <div class="bar"><button class="btn-save" onclick="saveFooter()">Save Footer</button><span class="toast" id="t-foot">Saved!</span></div>
+      </div>
+
+      <!-- EXPORT -->
+      <div class="panel" id="panel-export">
+        <div class="panel-title">Export / Import</div>
+        <div class="panel-sub">How content updates reach your live site.</div>
+        <div class="help-box" style="background:#FFFFF0;border-color:#F6E05E;color:#744210">
+          <strong>How publishing works:</strong><br>
+          1. Make your edits in any section and save them.<br>
+          2. Click <strong>Download content.json</strong> below.<br>
+          3. Go to your GitHub repository → find <code>content.json</code> → upload/replace it with the downloaded file.<br>
+          4. GitHub Pages will redeploy in ~1 minute. Your live site is updated!
+        </div>
+        <div class="card">
+          <div class="card-title">Export Current Content</div>
+          <p style="font-size:.85rem;color:var(--gray);margin-bottom:16px">Download the current content as a JSON file to upload to your GitHub repo.</p>
+          <button class="btn-dl" onclick="downloadJSON()">⬇ Download content.json</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Import Content</div>
+          <p style="font-size:.85rem;color:var(--gray);margin-bottom:16px">Load a content.json file to edit (useful when switching devices).</p>
+          <input type="file" id="imp-file" accept=".json" style="font-size:.85rem" onchange="importJSON(this)">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const PASS = 'stratgo@2024';
+const KEY = 'stratgo_content';
+
+let content = {};
+
+function doLogin(){
+  const p=document.getElementById('pwd').value;
+  if(p===PASS){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('admin-screen').style.display='block';
+    loadContent();
+  } else {
+    document.getElementById('err').textContent='Incorrect password. Try again.';
+  }
+}
+function logout(){
+  document.getElementById('admin-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('pwd').value='';
+}
+
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toast(id){
+  const t=document.getElementById(id);
+  t.style.display='inline-block';
+  setTimeout(()=>t.style.display='none',2000);
+}
+
+function save(){localStorage.setItem(KEY,JSON.stringify(content));}
+
+async function loadContent(){
+  const local=localStorage.getItem(KEY);
+  if(local){content=JSON.parse(local);}
+  else{
+    try{const r=await fetch('content.json?v='+Date.now());if(r.ok)content=await r.json();}
+    catch(e){}
+  }
+  populateForms();
+}
+
+function populateForms(){
+  const c=content;
+  // Hero
+  if(c.hero){
+    document.getElementById('h-ey').value=c.hero.eyebrow||'';
+    document.getElementById('h-hl').value=c.hero.headline||'';
+    document.getElementById('h-sub').value=c.hero.sub||'';
+    document.getElementById('h-cta').value=c.hero.cta||'';
+  }
+  // Stats
+  const sg=document.getElementById('stats-grid');
+  sg.innerHTML=(c.stats||[]).map((s,i)=>`
+    <div class="stat-item">
+      <label>Stat ${i+1} Value</label><input id="sv-${i}" value="${s.value||''}">
+      <label style="margin-top:8px">Stat ${i+1} Label</label><input id="sl-${i}" value="${s.label||''}">
+    </div>`).join('');
+  // Services
+  const sl=document.getElementById('svc-list');
+  sl.innerHTML=(c.services||[]).map((s,i)=>`
+    <div class="svc-item">
+      <label>Title</label><input id="st-${i}" value="${s.title||''}">
+      <label>Description</label><textarea id="sd-${i}">${s.desc||''}</textarea>
+    </div>`).join('');
+  // About
+  document.getElementById('ab-intro').value=(c.about&&c.about.intro)||'';
+  const fw=document.getElementById('founders-wrap');
+  fw.innerHTML=(c.about&&c.about.founders||[]).map((f,i)=>`
+    <div class="card">
+      <div class="card-title">Founder ${i+1}: ${f.name}</div>
+      <div class="field-row">
+        <div class="field"><label>Full Name</label><input id="fn-${i}" value="${f.name||''}"></div>
+        <div class="field"><label>Role / Title</label><input id="fr-${i}" value="${f.role||''}"></div>
+      </div>
+      <div class="field"><label>Bio</label><textarea id="fb-${i}">${f.bio||''}</textarea></div>
+      <div class="field"><label>LinkedIn URL</label><input id="fl-${i}" value="${f.linkedin||''}"></div>
+    </div>`).join('');
+  // Why
+  const wl=document.getElementById('why-list');
+  wl.innerHTML=(c.why||[]).map((w,i)=>`
+    <div style="margin-bottom:16px;padding:16px;background:var(--bg);border:1px solid var(--border)">
+      <div class="field-row">
+        <div class="field"><label>Label</label><input id="wl-${i}" value="${w.label||''}"></div>
+        <div class="field"><label>Text</label><input id="wt-${i}" value="${w.text||''}"></div>
+      </div>
+    </div>`).join('');
+  // Contact
+  if(c.contact){
+    document.getElementById('c-head').value=c.contact.heading||'';
+    document.getElementById('c-sub').value=c.contact.sub||'';
+    document.getElementById('c-url').value=c.contact.formUrl||'';
+    document.getElementById('c-cta').value=c.contact.formCta||'';
+  }
+  // Footer
+  if(c.footer){
+    document.getElementById('f-tag').value=c.footer.tagline||'';
+    document.getElementById('f-copy').value=c.footer.copy||'';
+  }
+}
+
+function saveHero(){
+  content.hero={eyebrow:document.getElementById('h-ey').value,headline:document.getElementById('h-hl').value,sub:document.getElementById('h-sub').value,cta:document.getElementById('h-cta').value};
+  save();toast('t-hero');
+}
+function saveStats(){
+  content.stats=(content.stats||[]).map((_,i)=>({value:document.getElementById('sv-'+i).value,label:document.getElementById('sl-'+i).value}));
+  save();toast('t-stats');
+}
+function saveServices(){
+  content.services=(content.services||[]).map((_,i)=>({title:document.getElementById('st-'+i).value,desc:document.getElementById('sd-'+i).value}));
+  save();toast('t-svc');
+}
+function saveAbout(){
+  content.about={intro:document.getElementById('ab-intro').value,founders:(content.about&&content.about.founders||[]).map((_,i)=>({name:document.getElementById('fn-'+i).value,role:document.getElementById('fr-'+i).value,bio:document.getElementById('fb-'+i).value,linkedin:document.getElementById('fl-'+i).value}))};
+  save();toast('t-ab');
+}
+function saveWhy(){
+  content.why=(content.why||[]).map((_,i)=>({label:document.getElementById('wl-'+i).value,text:document.getElementById('wt-'+i).value}));
+  save();toast('t-why');
+}
+function saveContact(){
+  content.contact={heading:document.getElementById('c-head').value,sub:document.getElementById('c-sub').value,formUrl:document.getElementById('c-url').value,formCta:document.getElementById('c-cta').value};
+  save();toast('t-con');
+}
+function saveFooter(){
+  content.footer={tagline:document.getElementById('f-tag').value,copy:document.getElementById('f-copy').value};
+  save();toast('t-foot');
+}
+function downloadJSON(){
+  const blob=new Blob([JSON.stringify(content,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='content.json';a.click();
+}
+function importJSON(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{try{content=JSON.parse(e.target.result);save();populateForms();alert('Imported successfully!');}catch(err){alert('Invalid JSON file.');}};
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>
