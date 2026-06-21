@@ -7,7 +7,7 @@
     "cta": "Start a Conversation"
   },
   "stats": [
-    { "value": "50+", "label": "Projects Delivered" },
+    { "value": "10+", "label": "Projects Delivered" },
     { "value": "15+", "label": "Industries Served" },
     { "value": "100%", "label": "Senior-Led Engagements" },
     { "value": "24h", "label": "Response Guarantee" }
@@ -49,5 +49,5 @@
     "formUrl": "https://forms.gle/eqi5uAZNsGTReFTH8",
     "formCta": "Reach Out to Us"
   },
-  "footer": { "tagline": "Strategy. Execution. Results.", "copy": "2025 StratGO Consulting. All rights reserved." }
+  //"footer": { "tagline": "Strategy. Execution. Results.", "copy": "2025 StratGO Consulting. All rights reserved." }
 }
