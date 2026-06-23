@@ -3,232 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>StratGO Admin Panel</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>StratGO Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0B1426;--gold:#BFA054;--white:#fff;--bg:#F7F8FA;--border:#E2E8F0;--text:#1A2233;--gray:#6B7A99;--red:#E53E3E;--green:#38A169}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+:root{--bg:#0D1117;--gold:#C9A84C;--white:#fff;--surface:#F7F8FA;--border:#E2E8F0;--text:#1A2233;--gray:#6B7A99;--red:#E53E3E;--green:#38A169;--blue:#3182CE}
+body{font-family:'Inter',sans-serif;background:var(--surface);color:var(--text);-webkit-font-smoothing:antialiased}
 
 /* LOGIN */
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--navy)}
-.login-box{background:#fff;padding:48px 40px;width:100%;max-width:400px;border-bottom:3px solid var(--gold)}
-.login-logo{font-size:1.5rem;font-weight:700;margin-bottom:6px;color:var(--navy)}
-.login-logo span{color:var(--gold)}
-.login-sub{font-size:.84rem;color:var(--gray);margin-bottom:32px}
-.login-box label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);margin-bottom:7px}
-.login-box input{width:100%;border:1.5px solid var(--border);padding:11px 14px;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s}
-.login-box input:focus{border-color:var(--gold)}
-.login-err{color:var(--red);font-size:.82rem;margin-top:10px;min-height:20px}
-.btn-login{width:100%;margin-top:20px;background:var(--navy);color:#fff;border:none;padding:13px;font-size:.9rem;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:background .2s}
-.btn-login:hover{background:#1a2f4f}
+#LS{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg)}
+.lbox{background:#fff;padding:44px 38px;width:100%;max-width:380px;border-bottom:3px solid var(--gold)}
+.llogo{font-size:1.4rem;font-weight:700;color:var(--bg);margin-bottom:4px}.llogo span{color:var(--gold)}
+.lsub{font-size:.82rem;color:var(--gray);margin-bottom:28px}
+.lbox label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:6px}
+.lbox input[type=password]{width:100%;border:1.5px solid var(--border);padding:10px 13px;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s}
+.lbox input[type=password]:focus{border-color:var(--gold)}
+.lerr{color:var(--red);font-size:.8rem;margin-top:8px;min-height:18px}
+.lbtn{width:100%;margin-top:18px;background:var(--bg);color:#fff;border:none;padding:12px;font-size:.88rem;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.05em;transition:background .2s}
+.lbtn:hover{background:#1a2f4f}
 
-/* ADMIN LAYOUT */
-#admin-screen{display:none}
-header{background:var(--navy);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(191,160,84,.25)}
-.h-logo{font-size:1.2rem;font-weight:700;color:#fff}.h-logo span{color:var(--gold)}
-.h-right{display:flex;gap:12px;align-items:center}
-.h-tag{font-size:.75rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase}
-.btn-out{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:7px 14px;font-size:.78rem;cursor:pointer;font-family:inherit;transition:all .2s}
-.btn-out:hover{border-color:var(--gold);color:var(--gold)}
+/* LAYOUT */
+#AS{display:none}
+header{background:var(--bg);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,.2)}
+.hlogo{font-size:1.15rem;font-weight:700;color:#fff}.hlogo span{color:var(--gold)}
+.hright{display:flex;align-items:center;gap:10px}
+.htag{font-size:.7rem;color:rgba(255,255,255,.38);letter-spacing:.08em;text-transform:uppercase}
+.bout{background:none;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.65);padding:6px 13px;font-size:.75rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.bout:hover{border-color:var(--gold);color:var(--gold)}
+.wrap{display:grid;grid-template-columns:210px 1fr;min-height:calc(100vh - 58px)}
+.side{background:#fff;border-right:1px solid var(--border);padding:20px 0}
+.side h3{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);padding:0 18px;margin-bottom:6px}
+.side a{display:block;padding:9px 18px;font-size:.83rem;color:var(--text);cursor:pointer;transition:all .2s;border-left:3px solid transparent}
+.side a:hover{background:var(--surface);color:var(--bg)}
+.side a.act{background:var(--surface);color:var(--bg);border-left-color:var(--gold);font-weight:600}
+.side hr{border:none;border-top:1px solid var(--border);margin:12px 0}
+.main{padding:28px;overflow-y:auto}
+.panel{display:none}.panel.act{display:block}
+.ptitle{font-size:1.15rem;font-weight:700;color:var(--bg);margin-bottom:3px}
+.psub{font-size:.82rem;color:var(--gray);margin-bottom:22px}
 
-.admin-body{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 60px)}
-.sidebar{background:var(--white);border-right:1px solid var(--border);padding:24px 0}
-.sidebar h3{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);padding:0 20px;margin-bottom:8px}
-.sidebar a{display:block;padding:10px 20px;font-size:.85rem;color:var(--text);cursor:pointer;transition:all .2s;border-left:3px solid transparent}
-.sidebar a:hover{background:var(--bg);color:var(--navy)}
-.sidebar a.active{background:var(--bg);color:var(--navy);border-left-color:var(--gold);font-weight:600}
-.sidebar hr{border:none;border-top:1px solid var(--border);margin:16px 0}
+/* FORMS */
+.card{background:#fff;border:1px solid var(--border);padding:24px;margin-bottom:18px}
+.ctitle{font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--bg);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.f{margin-bottom:14px}
+.f label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);margin-bottom:5px}
+.f input,.f textarea,.f select{width:100%;border:1.5px solid var(--border);padding:8px 11px;font-size:.86rem;font-family:inherit;outline:none;resize:vertical;transition:border .2s;color:var(--text)}
+.f input:focus,.f textarea:focus{border-color:var(--gold)}
+.f textarea{min-height:78px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.photo-preview{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);display:none;margin-top:10px}
+.photo-ini{width:72px;height:72px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:var(--gold);margin-top:10px;font-family:Georgia,serif}
 
-.main{padding:32px;overflow-y:auto}
-.panel{display:none}.panel.active{display:block}
-.panel-title{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:4px}
-.panel-sub{font-size:.85rem;color:var(--gray);margin-bottom:28px}
-
-/* FORM ELEMENTS */
-.card{background:var(--white);border:1px solid var(--border);padding:28px;margin-bottom:20px}
-.card-title{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.field{margin-bottom:16px}
-.field label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);margin-bottom:6px}
-.field input,.field textarea{width:100%;border:1.5px solid var(--border);padding:9px 12px;font-size:.88rem;font-family:inherit;outline:none;resize:vertical;transition:border .2s;color:var(--text)}
-.field input:focus,.field textarea:focus{border-color:var(--gold)}
-.field textarea{min-height:90px}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.stat-item{background:var(--bg);padding:14px;border:1px solid var(--border)}
-.stat-item label{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:6px}
-.stat-item input{width:100%;border:1.5px solid var(--border);padding:8px 10px;font-size:.88rem;font-family:inherit;outline:none;transition:border .2s}
-.stat-item input:focus{border-color:var(--gold)}
-
-/* SERVICE CARDS */
-.svc-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.svc-item{background:var(--bg);padding:16px;border:1px solid var(--border)}
-.svc-item label{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:5px}
-.svc-item input,.svc-item textarea{width:100%;border:1.5px solid var(--border);padding:7px 10px;font-size:.84rem;font-family:inherit;outline:none;resize:none;transition:border .2s;margin-bottom:8px}
-.svc-item input:focus,.svc-item textarea:focus{border-color:var(--gold)}
-.svc-item textarea{min-height:72px}
+/* SERVICE EDITOR */
+.svc-list{display:flex;flex-direction:column;gap:12px}
+.svc-item{background:var(--surface);border:1px solid var(--border);padding:14px 16px;position:relative}
+.svc-item-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.svc-item-n{font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.08em}
+.del-btn{background:none;border:1px solid #FED7D7;color:var(--red);padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.del-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.add-btn{display:flex;align-items:center;gap:8px;background:none;border:1.5px dashed var(--border);padding:13px 18px;font-size:.83rem;color:var(--gray);cursor:pointer;font-family:inherit;width:100%;transition:all .2s;justify-content:center;margin-top:12px}
+.add-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.04)}
 
 /* BUTTONS */
-.btn-save{background:var(--gold);color:var(--navy);border:none;padding:11px 24px;font-size:.88rem;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:background .2s}
-.btn-save:hover{background:#D4B76A}
-.btn-dl{background:var(--navy);color:#fff;border:none;padding:11px 24px;font-size:.88rem;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:background .2s}
-.btn-dl:hover{background:#1a2f4f}
-.btn-import{background:transparent;color:var(--navy);border:1.5px solid var(--navy);padding:11px 20px;font-size:.88rem;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:all .2s}
-.btn-import:hover{background:var(--navy);color:#fff}
-.bar{display:flex;gap:12px;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);flex-wrap:wrap}
-.toast{display:none;background:var(--green);color:#fff;padding:9px 18px;font-size:.82rem;font-weight:600;letter-spacing:.04em}
-.help-box{background:#EBF8FF;border:1px solid #BEE3F8;padding:16px;font-size:.82rem;line-height:1.7;color:#2B6CB0;margin-bottom:20px}
-.help-box strong{font-weight:700}
+.bsave{background:var(--gold);color:var(--bg);border:none;padding:10px 22px;font-size:.84rem;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+.bsave:hover{background:#E0BC6A}
+.bdl{background:var(--bg);color:#fff;border:none;padding:10px 22px;font-size:.84rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s}
+.bdl:hover{background:#1a2f4f}
+.bar{display:flex;gap:10px;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);flex-wrap:wrap}
+.toast{display:none;background:var(--green);color:#fff;padding:8px 16px;font-size:.78rem;font-weight:700}
+.info{background:#EBF8FF;border:1px solid #BEE3F8;padding:14px;font-size:.8rem;line-height:1.7;color:#2B6CB0;margin-bottom:18px}
+.info strong{font-weight:700}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">Strat<span>GO</span></div>
-    <div class="login-sub">Admin Panel — Restricted Access</div>
-    <label for="pwd">Password</label>
-    <input type="password" id="pwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
-    <div class="login-err" id="err"></div>
-    <button class="btn-login" onclick="doLogin()">Sign In</button>
+<div id="LS">
+  <div class="lbox">
+    <div class="llogo">Strat<span>GO</span></div>
+    <div class="lsub">Admin Panel — Restricted Access</div>
+    <label>Password</label>
+    <input type="password" id="pwd" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()">
+    <div class="lerr" id="err"></div>
+    <button class="lbtn" onclick="login()">Sign In</button>
   </div>
 </div>
 
-<!-- ADMIN -->
-<div id="admin-screen">
+<div id="AS">
   <header>
-    <div class="h-logo">Strat<span>GO</span> <span style="font-size:.8rem;font-weight:400;color:rgba(255,255,255,.4);margin-left:4px">Admin</span></div>
-    <div class="h-right">
-      <span class="h-tag">Content Manager</span>
-      <button class="btn-out" onclick="logout()">Sign Out</button>
-    </div>
+    <div class="hlogo">Strat<span>GO</span> <span style="font-weight:400;font-size:.8rem;color:rgba(255,255,255,.35);margin-left:4px">Admin</span></div>
+    <div class="hright"><span class="htag">Content Manager</span><button class="bout" onclick="logout()">Sign Out</button></div>
   </header>
-  <div class="admin-body">
-    <div class="sidebar">
+  <div class="wrap">
+    <div class="side">
       <h3>Sections</h3>
-      <a class="active" onclick="showPanel('hero')">Hero</a>
-      <a onclick="showPanel('stats')">Stats</a>
-      <a onclick="showPanel('services')">Services</a>
-      <a onclick="showPanel('about')">About & Founders</a>
-      <a onclick="showPanel('why')">Why StratGO</a>
-      <a onclick="showPanel('contact')">Contact</a>
-      <a onclick="showPanel('footer')">Footer</a>
+      <a class="act" onclick="show('hero',this)">Hero</a>
+      <a onclick="show('stats',this)">Stats</a>
+      <a onclick="show('services',this)">Services</a>
+      <a onclick="show('about',this)">About & Founders</a>
+      <a onclick="show('why',this)">Why StratGO</a>
+      <a onclick="show('contact',this)">Contact</a>
+      <a onclick="show('footer',this)">Footer</a>
       <hr>
       <h3>Tools</h3>
-      <a onclick="showPanel('export')">Export / Import</a>
+      <a onclick="show('export',this)">Export / Import</a>
     </div>
     <div class="main">
 
       <!-- HERO -->
-      <div class="panel active" id="panel-hero">
-        <div class="panel-title">Hero Section</div>
-        <div class="panel-sub">The first thing visitors see. Keep the headline bold and direct.</div>
+      <div class="panel act" id="p-hero">
+        <div class="ptitle">Hero Section</div><div class="psub">The first thing visitors see.</div>
         <div class="card">
-          <div class="card-title">Hero Content</div>
-          <div class="field"><label>Eyebrow Text</label><input id="h-ey" placeholder="e.g. Management Consulting"></div>
-          <div class="field"><label>Main Headline</label><input id="h-hl" placeholder="Bold value proposition"></div>
-          <div class="field"><label>Subheadline</label><textarea id="h-sub"></textarea></div>
-          <div class="field"><label>CTA Button Text</label><input id="h-cta" placeholder="e.g. Start a Conversation"></div>
+          <div class="ctitle">Hero Content</div>
+          <div class="f"><label>Eyebrow</label><input id="h-ey"></div>
+          <div class="f"><label>Headline</label><input id="h-hl"></div>
+          <div class="f"><label>Subheadline</label><textarea id="h-sub"></textarea></div>
+          <div class="f"><label>CTA Button Text</label><input id="h-cta"></div>
         </div>
-        <div class="bar"><button class="btn-save" onclick="saveHero()">Save Hero</button><span class="toast" id="t-hero">Saved!</span></div>
+        <div class="bar"><button class="bsave" onclick="saveHero()">Save Hero</button><span class="toast" id="t-hero">✓ Saved</span></div>
       </div>
 
       <!-- STATS -->
-      <div class="panel" id="panel-stats">
-        <div class="panel-title">Statistics Bar</div>
-        <div class="panel-sub">Four key numbers shown below the hero. Keep values punchy (e.g. 50+, 100%).</div>
-        <div class="card">
-          <div class="card-title">Four Stats</div>
-          <div class="stat-grid" id="stats-grid"></div>
-        </div>
-        <div class="bar"><button class="btn-save" onclick="saveStats()">Save Stats</button><span class="toast" id="t-stats">Saved!</span></div>
+      <div class="panel" id="p-stats">
+        <div class="ptitle">Statistics</div><div class="psub">Four headline numbers below the hero.</div>
+        <div class="card"><div class="ctitle">Stats</div><div id="stats-wrap"></div></div>
+        <div class="bar"><button class="bsave" onclick="saveStats()">Save Stats</button><span class="toast" id="t-stats">✓ Saved</span></div>
       </div>
 
-      <!-- SERVICES -->
-      <div class="panel" id="panel-services">
-        <div class="panel-title">Services</div>
-        <div class="panel-sub">Six service offerings displayed in a 3×2 grid.</div>
+      <!-- SERVICES — add/remove -->
+      <div class="panel" id="p-services">
+        <div class="ptitle">Services</div>
+        <div class="psub">Add or remove services freely. The website grid auto-adjusts to fit however many you have.</div>
         <div class="card">
-          <div class="card-title">Service Cards</div>
-          <div class="svc-list" id="svc-list"></div>
+          <div class="ctitle">Service Cards</div>
+          <div class="svc-list" id="svc-wrap"></div>
+          <button class="add-btn" onclick="addService()">＋ Add New Service</button>
         </div>
-        <div class="bar"><button class="btn-save" onclick="saveServices()">Save Services</button><span class="toast" id="t-svc">Saved!</span></div>
+        <div class="bar"><button class="bsave" onclick="saveServices()">Save Services</button><span class="toast" id="t-svc">✓ Saved</span></div>
       </div>
 
-      <!-- ABOUT -->
-      <div class="panel" id="panel-about">
-        <div class="panel-title">About & Founders</div>
-        <div class="panel-sub">Company intro and the two founder profiles.</div>
+      <!-- ABOUT — with photo upload -->
+      <div class="panel" id="p-about">
+        <div class="ptitle">About & Founders</div><div class="psub">Company intro and founder profiles with photos.</div>
         <div class="card">
-          <div class="card-title">Company Introduction</div>
-          <div class="field"><textarea id="ab-intro" style="min-height:100px"></textarea></div>
+          <div class="ctitle">Company Introduction</div>
+          <div class="f"><textarea id="ab-intro" style="min-height:90px"></textarea></div>
         </div>
         <div id="founders-wrap"></div>
-        <div class="bar"><button class="btn-save" onclick="saveAbout()">Save About</button><span class="toast" id="t-ab">Saved!</span></div>
+        <div class="bar"><button class="bsave" onclick="saveAbout()">Save About</button><span class="toast" id="t-ab">✓ Saved</span></div>
       </div>
 
       <!-- WHY -->
-      <div class="panel" id="panel-why">
-        <div class="panel-title">Why StratGO</div>
-        <div class="panel-sub">Four differentiators displayed in a 2×2 grid on a dark background.</div>
-        <div class="card">
-          <div class="card-title">Differentiators</div>
-          <div id="why-list"></div>
-        </div>
-        <div class="bar"><button class="btn-save" onclick="saveWhy()">Save Why Us</button><span class="toast" id="t-why">Saved!</span></div>
+      <div class="panel" id="p-why">
+        <div class="ptitle">Why StratGO</div><div class="psub">Four differentiators in a 2×2 grid.</div>
+        <div class="card"><div class="ctitle">Differentiators</div><div id="why-wrap"></div></div>
+        <div class="bar"><button class="bsave" onclick="saveWhy()">Save Why Us</button><span class="toast" id="t-why">✓ Saved</span></div>
       </div>
 
       <!-- CONTACT -->
-      <div class="panel" id="panel-contact">
-        <div class="panel-title">Contact Section</div>
-        <div class="panel-sub">Update your Google Form URL here. Paste the shareable link from Google Forms.</div>
-        <div class="help-box">
-          <strong>How to get your Google Form URL:</strong> Open your Google Form → click Send → click the link icon → copy the short URL (forms.gle/...) → paste it below.
-          <br><br><strong>Suggested form fields:</strong> Full Name · Company Name · Job Title · Business Email · Area of Interest (dropdown) · Project Timeline · Brief Description
-        </div>
+      <div class="panel" id="p-contact">
+        <div class="ptitle">Contact Section</div><div class="psub">Update your Google Form URL here.</div>
+        <div class="info"><strong>Get your form URL:</strong> Google Forms → Send → Link icon → Copy the forms.gle/... link → paste below.<br><strong>Suggested fields:</strong> Full Name · Company · Job Title · Business Email · Area of Interest · Timeline · Description</div>
         <div class="card">
-          <div class="card-title">Contact Content</div>
-          <div class="field"><label>Section Heading</label><input id="c-head"></div>
-          <div class="field"><label>Subtext</label><textarea id="c-sub" style="min-height:70px"></textarea></div>
-          <div class="field"><label>Google Form URL</label><input id="c-url" placeholder="https://forms.gle/..."></div>
-          <div class="field"><label>Button Text</label><input id="c-cta"></div>
+          <div class="ctitle">Contact Content</div>
+          <div class="f"><label>Section Heading</label><input id="c-head"></div>
+          <div class="f"><label>Subtext</label><textarea id="c-sub" style="min-height:65px"></textarea></div>
+          <div class="f"><label>Google Form URL</label><input id="c-url" placeholder="https://forms.gle/..."></div>
+          <div class="f"><label>Button Text</label><input id="c-cta"></div>
         </div>
-        <div class="bar"><button class="btn-save" onclick="saveContact()">Save Contact</button><span class="toast" id="t-con">Saved!</span></div>
+        <div class="bar"><button class="bsave" onclick="saveContact()">Save Contact</button><span class="toast" id="t-con">✓ Saved</span></div>
       </div>
 
       <!-- FOOTER -->
-      <div class="panel" id="panel-footer">
-        <div class="panel-title">Footer</div>
+      <div class="panel" id="p-footer">
+        <div class="ptitle">Footer</div>
         <div class="card">
-          <div class="card-title">Footer Content</div>
-          <div class="field"><label>Tagline</label><input id="f-tag"></div>
-          <div class="field"><label>Copyright Text (without ©)</label><input id="f-copy"></div>
+          <div class="ctitle">Footer Content</div>
+          <div class="f"><label>Tagline</label><input id="f-tag"></div>
+          <div class="f"><label>Copyright text (without ©)</label><input id="f-copy"></div>
         </div>
-        <div class="bar"><button class="btn-save" onclick="saveFooter()">Save Footer</button><span class="toast" id="t-foot">Saved!</span></div>
+        <div class="bar"><button class="bsave" onclick="saveFooter()">Save Footer</button><span class="toast" id="t-foot">✓ Saved</span></div>
       </div>
 
       <!-- EXPORT -->
-      <div class="panel" id="panel-export">
-        <div class="panel-title">Export / Import</div>
-        <div class="panel-sub">How content updates reach your live site.</div>
-        <div class="help-box" style="background:#FFFFF0;border-color:#F6E05E;color:#744210">
-          <strong>How publishing works:</strong><br>
-          1. Make your edits in any section and save them.<br>
-          2. Click <strong>Download content.json</strong> below.<br>
-          3. Go to your GitHub repository → find <code>content.json</code> → upload/replace it with the downloaded file.<br>
-          4. GitHub Pages will redeploy in ~1 minute. Your live site is updated!
+      <div class="panel" id="p-export">
+        <div class="ptitle">Export / Import</div><div class="psub">How to publish your changes to the live site.</div>
+        <div class="info" style="background:#FFFFF0;border-color:#F6E05E;color:#744210">
+          <strong>Publishing workflow:</strong><br>
+          1. Make edits in any section → Save<br>
+          2. Click <strong>Download content.json</strong><br>
+          3. Go to GitHub repo → find content.json → upload/replace → Commit<br>
+          4. Live site updates in ~60 seconds ✓
         </div>
         <div class="card">
-          <div class="card-title">Export Current Content</div>
-          <p style="font-size:.85rem;color:var(--gray);margin-bottom:16px">Download the current content as a JSON file to upload to your GitHub repo.</p>
-          <button class="btn-dl" onclick="downloadJSON()">⬇ Download content.json</button>
+          <div class="ctitle">Export</div>
+          <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px">Download your current content to upload to GitHub.</p>
+          <button class="bdl" onclick="dl()">⬇ Download content.json</button>
         </div>
         <div class="card">
-          <div class="card-title">Import Content</div>
-          <p style="font-size:.85rem;color:var(--gray);margin-bottom:16px">Load a content.json file to edit (useful when switching devices).</p>
-          <input type="file" id="imp-file" accept=".json" style="font-size:.85rem" onchange="importJSON(this)">
+          <div class="ctitle">Import</div>
+          <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px">Load an existing content.json to edit it here.</p>
+          <input type="file" accept=".json" onchange="imp(this)" style="font-size:.83rem">
         </div>
       </div>
 
@@ -237,149 +211,165 @@ header{background:var(--navy);padding:0 32px;height:60px;display:flex;align-item
 </div>
 
 <script>
-const PASS = 'stratgo@2024';
-const KEY = 'stratgo_content';
+const PASS='stratgo@2024';
+const KEY='sg_content';
+let C={};
 
-let content = {};
-
-function doLogin(){
-  const p=document.getElementById('pwd').value;
-  if(p===PASS){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('admin-screen').style.display='block';
-    loadContent();
+function login(){
+  if(document.getElementById('pwd').value===PASS){
+    document.getElementById('LS').style.display='none';
+    document.getElementById('AS').style.display='block';
+    load();
   } else {
-    document.getElementById('err').textContent='Incorrect password. Try again.';
+    document.getElementById('err').textContent='Incorrect password.';
   }
 }
-function logout(){
-  document.getElementById('admin-screen').style.display='none';
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('pwd').value='';
+function logout(){document.getElementById('AS').style.display='none';document.getElementById('LS').style.display='flex';document.getElementById('pwd').value='';}
+
+function show(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.side a').forEach(a=>a.classList.remove('act'));
+  document.getElementById('p-'+id).classList.add('act');
+  if(el)el.classList.add('act');
 }
 
-function showPanel(id){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  event.target.classList.add('active');
-}
+function toast(id){const t=document.getElementById(id);t.style.display='inline-block';setTimeout(()=>t.style.display='none',2000);}
+function save(){localStorage.setItem(KEY,JSON.stringify(C));}
 
-function toast(id){
-  const t=document.getElementById(id);
-  t.style.display='inline-block';
-  setTimeout(()=>t.style.display='none',2000);
-}
-
-function save(){localStorage.setItem(KEY,JSON.stringify(content));}
-
-async function loadContent(){
+async function load(){
   const local=localStorage.getItem(KEY);
-  if(local){content=JSON.parse(local);}
-  else{
-    try{const r=await fetch('content.json?v='+Date.now());if(r.ok)content=await r.json();}
-    catch(e){}
-  }
-  populateForms();
+  if(local){C=JSON.parse(local);}
+  else{try{const r=await fetch('content.json?v='+Date.now());if(r.ok)C=await r.json();}catch(e){}}
+  populate();
 }
 
-function populateForms(){
-  const c=content;
+function populate(){
   // Hero
-  if(c.hero){
-    document.getElementById('h-ey').value=c.hero.eyebrow||'';
-    document.getElementById('h-hl').value=c.hero.headline||'';
-    document.getElementById('h-sub').value=c.hero.sub||'';
-    document.getElementById('h-cta').value=c.hero.cta||'';
+  if(C.hero){
+    document.getElementById('h-ey').value=C.hero.eyebrow||'';
+    document.getElementById('h-hl').value=C.hero.headline||'';
+    document.getElementById('h-sub').value=C.hero.sub||'';
+    document.getElementById('h-cta').value=C.hero.cta||'';
   }
   // Stats
-  const sg=document.getElementById('stats-grid');
-  sg.innerHTML=(c.stats||[]).map((s,i)=>`
-    <div class="stat-item">
-      <label>Stat ${i+1} Value</label><input id="sv-${i}" value="${s.value||''}">
-      <label style="margin-top:8px">Stat ${i+1} Label</label><input id="sl-${i}" value="${s.label||''}">
+  const sw=document.getElementById('stats-wrap');
+  sw.innerHTML=(C.stats||[]).map((s,i)=>`
+    <div class="frow" style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+      <div class="f"><label>Value ${i+1}</label><input id="sv-${i}" value="${s.value||''}"></div>
+      <div class="f"><label>Label ${i+1}</label><input id="sl-${i}" value="${s.label||''}"></div>
     </div>`).join('');
   // Services
-  const sl=document.getElementById('svc-list');
-  sl.innerHTML=(c.services||[]).map((s,i)=>`
-    <div class="svc-item">
-      <label>Title</label><input id="st-${i}" value="${s.title||''}">
-      <label>Description</label><textarea id="sd-${i}">${s.desc||''}</textarea>
-    </div>`).join('');
+  renderSvcAdmin();
   // About
-  document.getElementById('ab-intro').value=(c.about&&c.about.intro)||'';
-  const fw=document.getElementById('founders-wrap');
-  fw.innerHTML=(c.about&&c.about.founders||[]).map((f,i)=>`
-    <div class="card">
-      <div class="card-title">Founder ${i+1}: ${f.name}</div>
-      <div class="field-row">
-        <div class="field"><label>Full Name</label><input id="fn-${i}" value="${f.name||''}"></div>
-        <div class="field"><label>Role / Title</label><input id="fr-${i}" value="${f.role||''}"></div>
-      </div>
-      <div class="field"><label>Bio</label><textarea id="fb-${i}">${f.bio||''}</textarea></div>
-      <div class="field"><label>LinkedIn URL</label><input id="fl-${i}" value="${f.linkedin||''}"></div>
-    </div>`).join('');
+  document.getElementById('ab-intro').value=(C.about&&C.about.intro)||'';
+  renderFoundersAdmin();
   // Why
-  const wl=document.getElementById('why-list');
-  wl.innerHTML=(c.why||[]).map((w,i)=>`
-    <div style="margin-bottom:16px;padding:16px;background:var(--bg);border:1px solid var(--border)">
-      <div class="field-row">
-        <div class="field"><label>Label</label><input id="wl-${i}" value="${w.label||''}"></div>
-        <div class="field"><label>Text</label><input id="wt-${i}" value="${w.text||''}"></div>
-      </div>
+  const ww=document.getElementById('why-wrap');
+  ww.innerHTML=(C.why||[]).map((w,i)=>`
+    <div class="frow" style="margin-bottom:12px">
+      <div class="f"><label>Label</label><input id="wl-${i}" value="${w.label||''}"></div>
+      <div class="f"><label>Text</label><input id="wt-${i}" value="${w.text||''}"></div>
     </div>`).join('');
   // Contact
-  if(c.contact){
-    document.getElementById('c-head').value=c.contact.heading||'';
-    document.getElementById('c-sub').value=c.contact.sub||'';
-    document.getElementById('c-url').value=c.contact.formUrl||'';
-    document.getElementById('c-cta').value=c.contact.formCta||'';
+  if(C.contact){
+    document.getElementById('c-head').value=C.contact.heading||'';
+    document.getElementById('c-sub').value=C.contact.sub||'';
+    document.getElementById('c-url').value=C.contact.formUrl||'';
+    document.getElementById('c-cta').value=C.contact.formCta||'';
   }
   // Footer
-  if(c.footer){
-    document.getElementById('f-tag').value=c.footer.tagline||'';
-    document.getElementById('f-copy').value=c.footer.copy||'';
+  if(C.footer){
+    document.getElementById('f-tag').value=C.footer.tagline||'';
+    document.getElementById('f-copy').value=C.footer.copy||'';
   }
 }
 
-function saveHero(){
-  content.hero={eyebrow:document.getElementById('h-ey').value,headline:document.getElementById('h-hl').value,sub:document.getElementById('h-sub').value,cta:document.getElementById('h-cta').value};
-  save();toast('t-hero');
+function renderSvcAdmin(){
+  const wrap=document.getElementById('svc-wrap');
+  wrap.innerHTML=(C.services||[]).map((s,i)=>`
+    <div class="svc-item" id="si-${i}">
+      <div class="svc-item-head">
+        <span class="svc-item-n">Service ${i+1}</span>
+        <button class="del-btn" onclick="delService(${i})">Remove</button>
+      </div>
+      <div class="f"><label>Title</label><input id="st-${i}" value="${s.title||''}"></div>
+      <div class="f"><label>Description</label><textarea id="sd-${i}" style="min-height:70px">${s.desc||''}</textarea></div>
+    </div>`).join('');
 }
-function saveStats(){
-  content.stats=(content.stats||[]).map((_,i)=>({value:document.getElementById('sv-'+i).value,label:document.getElementById('sl-'+i).value}));
-  save();toast('t-stats');
+
+function addService(){
+  if(!C.services)C.services=[];
+  C.services.push({title:'New Service',desc:'Describe your service here.'});
+  renderSvcAdmin();
 }
+
+function delService(i){
+  if(C.services.length<=1){alert('Keep at least one service.');return;}
+  if(confirm('Remove this service?')){C.services.splice(i,1);renderSvcAdmin();}
+}
+
+function renderFoundersAdmin(){
+  const wrap=document.getElementById('founders-wrap');
+  wrap.innerHTML=(C.about&&C.about.founders||[]).map((f,i)=>`
+    <div class="card">
+      <div class="ctitle">Founder ${i+1}: ${f.name}</div>
+      <div class="frow">
+        <div class="f"><label>Full Name</label><input id="fn-${i}" value="${f.name||''}"></div>
+        <div class="f"><label>Role / Title</label><input id="fr-${i}" value="${f.role||''}"></div>
+      </div>
+      <div class="f"><label>Bio</label><textarea id="fb-${i}">${f.bio||''}</textarea></div>
+      <div class="f"><label>LinkedIn URL</label><input id="fl-${i}" value="${f.linkedin||''}"></div>
+      <div class="f">
+        <label>Profile Photo</label>
+        <input type="file" accept="image/*" onchange="uploadPhoto(this,${i})" style="font-size:.82rem;margin-bottom:8px">
+        <br><small style="color:var(--gray);font-size:.76rem">Or paste an image URL:</small>
+        <input id="fp-${i}" value="${f.photo||''}" placeholder="https://example.com/photo.jpg" style="margin-top:6px" oninput="previewUrl(this,${i})">
+        <div id="photo-preview-${i}">
+          ${f.photo?`<img src="${f.photo}" class="photo-preview" style="display:block">`:`<div class="photo-ini" id="ini-${i}">${f.name.split(' ').map(w=>w[0]).join('')}</div>`}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function uploadPhoto(input,i){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const data=e.target.result;
+    document.getElementById('fp-'+i).value=data;
+    const prev=document.getElementById('photo-preview-'+i);
+    prev.innerHTML=`<img src="${data}" class="photo-preview" style="display:block">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewUrl(input,i){
+  const url=input.value.trim();
+  const prev=document.getElementById('photo-preview-'+i);
+  if(url){
+    prev.innerHTML=`<img src="${url}" class="photo-preview" style="display:block" onerror="this.style.display='none'">`;
+  } else {
+    const ini=(C.about.founders[i].name||'?').split(' ').map(w=>w[0]).join('');
+    prev.innerHTML=`<div class="photo-ini">${ini}</div>`;
+  }
+}
+
+function saveHero(){C.hero={eyebrow:document.getElementById('h-ey').value,headline:document.getElementById('h-hl').value,sub:document.getElementById('h-sub').value,cta:document.getElementById('h-cta').value};save();toast('t-hero');}
+function saveStats(){C.stats=(C.stats||[]).map((_,i)=>({value:document.getElementById('sv-'+i).value,label:document.getElementById('sl-'+i).value}));save();toast('t-stats');}
 function saveServices(){
-  content.services=(content.services||[]).map((_,i)=>({title:document.getElementById('st-'+i).value,desc:document.getElementById('sd-'+i).value}));
+  // Read current from DOM before saving
+  C.services=(C.services||[]).map((_,i)=>({title:document.getElementById('st-'+i).value,desc:document.getElementById('sd-'+i).value}));
   save();toast('t-svc');
 }
 function saveAbout(){
-  content.about={intro:document.getElementById('ab-intro').value,founders:(content.about&&content.about.founders||[]).map((_,i)=>({name:document.getElementById('fn-'+i).value,role:document.getElementById('fr-'+i).value,bio:document.getElementById('fb-'+i).value,linkedin:document.getElementById('fl-'+i).value}))};
-  save();toast('t-ab');
+  C.about={intro:document.getElementById('ab-intro').value,founders:(C.about&&C.about.founders||[]).map((_,i)=>({name:document.getElementById('fn-'+i).value,role:document.getElementById('fr-'+i).value,bio:document.getElementById('fb-'+i).value,linkedin:document.getElementById('fl-'+i).value,photo:document.getElementById('fp-'+i).value}))};
+  save();toast('t-ab');renderFoundersAdmin();
 }
-function saveWhy(){
-  content.why=(content.why||[]).map((_,i)=>({label:document.getElementById('wl-'+i).value,text:document.getElementById('wt-'+i).value}));
-  save();toast('t-why');
-}
-function saveContact(){
-  content.contact={heading:document.getElementById('c-head').value,sub:document.getElementById('c-sub').value,formUrl:document.getElementById('c-url').value,formCta:document.getElementById('c-cta').value};
-  save();toast('t-con');
-}
-function saveFooter(){
-  content.footer={tagline:document.getElementById('f-tag').value,copy:document.getElementById('f-copy').value};
-  save();toast('t-foot');
-}
-function downloadJSON(){
-  const blob=new Blob([JSON.stringify(content,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='content.json';a.click();
-}
-function importJSON(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{try{content=JSON.parse(e.target.result);save();populateForms();alert('Imported successfully!');}catch(err){alert('Invalid JSON file.');}};
-  reader.readAsText(file);
-}
+function saveWhy(){C.why=(C.why||[]).map((_,i)=>({label:document.getElementById('wl-'+i).value,text:document.getElementById('wt-'+i).value}));save();toast('t-why');}
+function saveContact(){C.contact={heading:document.getElementById('c-head').value,sub:document.getElementById('c-sub').value,formUrl:document.getElementById('c-url').value,formCta:document.getElementById('c-cta').value};save();toast('t-con');}
+function saveFooter(){C.footer={tagline:document.getElementById('f-tag').value,copy:document.getElementById('f-copy').value};save();toast('t-foot');}
+function dl(){const b=new Blob([JSON.stringify(C,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='content.json';a.click();}
+function imp(input){const file=input.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{C=JSON.parse(e.target.result);save();populate();alert('Imported!');}catch(err){alert('Invalid JSON.');}};r.readAsText(file);}
 </script>
 </body>
 </html>
