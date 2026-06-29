@@ -1,5 +1,7 @@
 {
-  "meta": { "title": "StratGO Consulting" },
+  "meta": {
+    "title": "StratGO Consulting"
+  },
   "hero": {
     "eyebrow": "Management Consulting",
     "headline": "We Transform Businesses Into Market Leaders",
@@ -7,34 +9,82 @@
     "cta": "Start a Conversation"
   },
   "stats": [
-    { "value": "50+", "label": "Projects Delivered" },
-    { "value": "15+", "label": "Industries Served" },
-    { "value": "100%", "label": "Senior-Led Engagements" },
-    { "value": "24h", "label": "Response Guarantee" }
+    {
+      "value": "10+",
+      "label": "Projects Delivered"
+    },
+    {
+      "value": "15+",
+      "label": "Industries Served"
+    },
+    {
+      "value": "5+",
+      "label": "Overall Experience (Years)"
+    },
+    {
+      "value": "24h",
+      "label": "Response Guarantee"
+    }
   ],
   "services": [
-    { "title": "Corporate Strategy", "desc": "Sharpening competitive positioning, portfolio decisions, and long-range growth roadmaps for sustained market leadership." },
-    { "title": "Operations Excellence", "desc": "Redesigning processes and supply chains to eliminate waste, increase throughput, and build operational resilience." },
-    { "title": "Data & Analytics", "desc": "Transforming raw data into strategic intelligence through advanced analytics, dashboards, and AI-driven decision frameworks." }
+    {
+      "title": "Corporate Strategy",
+      "desc": "Sharpening competitive positioning, portfolio decisions, and long-range growth roadmaps for sustained market leadership."
+    },
+    {
+      "title": "Operations Excellence & Transformations",
+      "desc": "Redesigning processes and supply chains to eliminate waste, increase throughput, and build operational resilience."
+    },
+    {
+      "title": "Data & Analytics",
+      "desc": "Transforming raw data into strategic intelligence through advanced analytics, dashboards, and AI-driven decision frameworks for better decision making."
+    }
   ],
   "about": {
     "intro": "StratGO was founded on a simple belief: great strategy is only as good as its execution. We combine rigorous analytical thinking with hands-on implementation expertise to deliver outcomes that last.",
     "founders": [
-      { "name": "Prateek Varshney", "role": "Co-Founder & Managing Partner", "bio": "A seasoned strategist with deep expertise in corporate strategy and business transformation. Prateek brings a track record of delivering measurable outcomes across industries, combining analytical rigor with practical execution.", "linkedin": "https://www.linkedin.com/in/prateekvarshney28/", "photo": "" },
-      { "name": "Kshitij Rohilla", "role": "Co-Founder & Managing Partner", "bio": "An operations and analytics expert who bridges the gap between data-driven insight and practical execution. Kshitij specializes in turning complex, ambiguous problems into scalable, repeatable solutions.", "linkedin": "https://www.linkedin.com/in/kshitijrohilla/", "photo": "" }
+      {
+        "name": "Prateek Varshney",
+        "role": "Co-Founder & Managing Partner",
+        "bio": "A seasoned strategist with deep expertise in corporate strategy and business transformation. Prateek brings a track record of delivering measurable outcomes across industries, combining analytical rigor with practical execution.",
+        "linkedin": "https://www.linkedin.com/in/prateekvarshney28/",
+        "photo": ""
+      },
+      {
+        "name": "Kshitij Rohilla",
+        "role": "Co-Founder & Managing Partner",
+        "bio": "An operations and analytics expert who bridges the gap between data-driven insight and practical execution. Kshitij specializes in turning complex, ambiguous problems into scalable, repeatable solutions.",
+        "linkedin": "https://www.linkedin.com/in/kshitijrohilla/",
+        "photo": ""
+      }
     ]
   },
   "why": [
-    { "label": "Outcome-Driven", "text": "Every engagement is structured around measurable business outcomes — not just deliverables or slide decks." },
-    { "label": "Senior-Led", "text": "Our founders personally lead every engagement. You get their expertise, not a hand-off to junior consultants." },
-    { "label": "Cross-Industry", "text": "Deep experience across financial services, technology, healthcare, consumer, and industrial sectors." },
-    { "label": "Agile Delivery", "text": "Rapid deployment with built-in feedback loops that adapt to your evolving business reality." }
+    {
+      "label": "Outcome-Driven",
+      "text": "Every engagement is structured around measurable business outcomes — not just deliverables or slide decks."
+    },
+    {
+      "label": "Senior-Led",
+      "text": "Our founders personally lead every engagement. You get their expertise, not a hand-off to junior consultants."
+    },
+    {
+      "label": "Cross-Industry",
+      "text": "Deep experience across financial services, technology, healthcare, consumer, and industrial sectors."
+    },
+    {
+      "label": "Agile Delivery",
+      "text": "Rapid deployment with built-in feedback loops that adapt to your evolving business reality."
+    }
   ],
   "contact": {
     "heading": "Start a Conversation",
     "sub": "Tell us about your business challenge. We'll respond within 24 hours.",
-    "formUrl": "https://forms.gle/REPLACE_WITH_YOUR_GOOGLE_FORM_URL",
+    "formUrl": "https://forms.gle/hBWVLLjpxvVJXNwZ8",
     "formCta": "Reach Out to Us"
   },
-  "footer": { "tagline": "Strategy. Execution. Results.", "copy": "2025 StratGO Consulting. All rights reserved." }
+  "footer": {
+    "tagline": "Strategy. Execution. Results.",
+    "copy": "2026 StratGO Consulting."
+  }
 }
